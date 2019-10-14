@@ -20,7 +20,7 @@ namespace MovieLibrary
             
         }
 
-        public static void ChangeMovieDetails(string name)
+        public static void ChangeMovieDetails(string name, int views)
         {
             var movieDetails = movies.SingleOrDefault(m => m.MovieName == name);
                 if (movieDetails == null)
@@ -28,6 +28,9 @@ namespace MovieLibrary
                 return;
 
             }
+            var movie = new MovieDetails();
+            movie.ChangeViewsNumbers(views);
+
 
         }
 

@@ -35,6 +35,8 @@ namespace MovieLibrary
 
         public  static int  lastTrackNumber = 0;
 
+        public static int Views { get; private set; }
+
         #endregion
 
         #region Constructor
@@ -43,6 +45,7 @@ namespace MovieLibrary
         {
             TrackNumber = ++lastTrackNumber;
             CreatedDate = DateTime.Now;
+            Views = 0;
            
         }
         #endregion
@@ -56,15 +59,13 @@ namespace MovieLibrary
             Rating = rating;
             ReleasedYear = releasedYear;
             Availability = availability;
+            
         }
 
       
-        public void ChangeMovieDetails(TypeOfLanguage language, double rating, int releasedYear, string availability)
+        public void ChangeViewsNumbers(int views)
         {
-            Language = language;
-            Rating = rating;
-            ReleasedYear = releasedYear;
-            Availability = availability;
+            Views = views;
         }
 
 

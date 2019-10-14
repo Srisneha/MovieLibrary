@@ -51,12 +51,16 @@ namespace MovieLibrary
                                     var availability = Console.ReadLine();
                                     var moviedetails =Movielibrarian.CreateMovieDetails(moviename, Language, rating, release, availability);
                                     Console.WriteLine($"TrackNumber : {moviedetails.TrackNumber}, CreatedDate : {moviedetails.CreatedDate}, MovieName : {moviedetails.MovieName}, language :{moviedetails.Language}," +
-                                        $"Rating : {moviedetails.Rating}, YearOfRelease : {moviedetails.ReleasedYear}, Availability : {moviedetails.Availability}");
+                                        $"Rating : {moviedetails.Rating}, YearOfRelease : {moviedetails.ReleasedYear}, Availability: {moviedetails.Availability}");
                                     break;
 
                                 case 2:
                                     Console.Write("Please enter the MovieName to be edited : ");
                                     var movie = Console.ReadLine();
+                                    Console.Write("Enter the view number that needs to be modified : ");
+                                    var viewNumber = Convert.ToInt32(Console.ReadLine());
+                                    Movielibrarian.ChangeMovieDetails(movie,viewNumber);
+
 
                                     break;
                                 case 3:
