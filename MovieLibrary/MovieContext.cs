@@ -9,7 +9,8 @@ namespace MovieLibrary
 
     {
 
-        public DbSet<MovieDetails> MovieDetail { get; set; }
+        public DbSet<MovieDetails> MoviesDetails { get; set; }
+        public DbSet<MovieRental> MoviesRental { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,9 +39,32 @@ namespace MovieLibrary
                     entity.Property(m => m.Rating)
                     .HasDefaultValue();
 
-                    entity.ToTable("MovieDetail");
+                    entity.ToTable("MoviesDetails");
                 });
+
+            modelBuilder.Entity<MovieRental>(entity =>
+
+            {
+                entity.HasKey(r => r.RentalID).HasName("PK_RentalID");
+
+                entity.Property(r => r.MovieName).IsRequired();
+                entity.Property(r => r.Language).IsRequired();
+                entity.Property(r => r.RentalType).IsRequired();
+                entity.Property(r => r.ReleasedYear).IsRequired();
+
+                entity.HasOne(r => r.MovieDetails)
+                .WithMany()
+                .HasForeignKey(r => r.TrackNumber);
+
+            }
+            );
+
+
         }
+
+
+
+       
     }
 
 }

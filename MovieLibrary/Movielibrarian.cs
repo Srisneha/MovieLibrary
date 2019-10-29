@@ -11,7 +11,7 @@ namespace MovieLibrary
 
     {
         private static List<MovieDetails> movies = new List<MovieDetails>();
-        public static MovieDetails CreateMovieDetails(string name, TypeOfLanguage language, double rating, int releasedYear, string availability)
+        public static MovieDetails CreateMovieDetails(string name, TypeOfLanguages language, double rating, int releasedYear, string availability)
         {
             var movieDetail = new MovieDetails();
             movieDetail.AddMovieDetails(name, language, rating, releasedYear, availability);

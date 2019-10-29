@@ -10,7 +10,7 @@ namespace MovieLibrary
     /// And user can only have view access to view the details
     /// </summary>
     /// 
-    enum TypeOfLanguage
+    enum TypeOfLanguages
     {
         English,
         Tamil,
@@ -28,7 +28,7 @@ namespace MovieLibrary
 
         public int TrackNumber { get; private set; }
 
-        public TypeOfLanguage Language { get; private set; }
+        public TypeOfLanguages Language { get; private set; }
 
         public double Rating { get;  private set; }
         public string Availability { get;  private set; }
@@ -52,7 +52,7 @@ namespace MovieLibrary
 
         #region Methods
 
-        public void AddMovieDetails(string name,TypeOfLanguage language, double rating,int releasedYear, string availability)
+        public void AddMovieDetails(string name,TypeOfLanguages language, double rating,int releasedYear, string availability)
         {
             MovieName = name;
             Language = language;
