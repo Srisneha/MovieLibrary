@@ -27,6 +27,7 @@ namespace MovieLibrary
                     Console.WriteLine("1.Add new movie details");
                     Console.WriteLine("2.Edit an existing movie details");
                     Console.WriteLine("3. Delete a movie details");
+                    Console.WriteLine("4.View movie records based on movie Name");
                     Console.WriteLine("4. Exit out");
                     var options = Convert.ToInt32(Console.ReadLine());
                     switch (options)
@@ -36,13 +37,13 @@ namespace MovieLibrary
                                     var moviename = Console.ReadLine();
                                     Console.Write("Select the language : ");
                                     //covert enum to an array
-                                    var Languages=Enum.GetNames(typeof(TypeOfLanguage));
+                                    var Languages=Enum.GetNames(typeof(TypeOfLanguages));
                                     //Loop through the array
                                     for( var i=0; i<Languages.Length;i++)
                                     {
                                         Console.WriteLine($"{i}.{Languages[i]}");
                                     }
-                                   var Language = Enum.Parse<TypeOfLanguage>(Console.ReadLine());
+                                   var Language = Enum.Parse<TypeOfLanguages>(Console.ReadLine());
                                     Console.Write("Enter the Rating : ");
                                     var rating = Convert.ToDouble(Console.ReadLine());
                                     Console.Write("Enter the year released : ");
@@ -55,11 +56,11 @@ namespace MovieLibrary
                                     break;
 
                                 case 2:
-                                    Console.Write("Please enter the MovieName to be edited : ");
-                                    var movie = Console.ReadLine();
+                                    Console.Write("Please enter the Movie track Number to be edited : ");
+                                    var trackNumber = Convert.ToInt32(Console.ReadLine());
                                     Console.Write("Enter the view number that needs to be modified : ");
                                     var viewNumber = Convert.ToInt32(Console.ReadLine());
-                                    Movielibrarian.ChangeMovieDetails(movie,viewNumber);
+                                    Movielibrarian.ChangeMovieDetails(trackNumber,viewNumber);
 
 
                                     break;
@@ -72,12 +73,14 @@ namespace MovieLibrary
                 }
 
             }
-            else
-            {
-                Console.WriteLine("Not a valid user, please select a valid choice");
-            }
+            
                     break;
+
+                case 2:
+
         }
+
+            
         
             }
 

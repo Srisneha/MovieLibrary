@@ -6,9 +6,10 @@ namespace MovieLibrary
 {
     enum TypesOfRental
     {
-       OneTime,
-       AnyTime
+       Rent,
+       Buy
     }
+    
     class MovieRental
     {
         public int RentalID { get; set; }

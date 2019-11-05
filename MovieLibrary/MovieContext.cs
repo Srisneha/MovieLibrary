@@ -47,6 +47,8 @@ namespace MovieLibrary
             {
                 entity.HasKey(r => r.RentalID).HasName("PK_RentalID");
 
+                entity.Property(r => r.RentalID).ValueGeneratedOnAdd();
+
                 entity.Property(r => r.MovieName).IsRequired();
                 entity.Property(r => r.Language).IsRequired();
                 entity.Property(r => r.RentalType).IsRequired();

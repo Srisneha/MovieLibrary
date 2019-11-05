@@ -22,20 +22,19 @@ namespace MovieLibrary
     class MovieDetails
     {
         #region Properties
-        public string MovieName { get;  private set; }
-        public int ReleasedYear { get;  private set;}
-        public DateTime CreatedDate { get; private set; }
+        public string MovieName { get;   set; }
+        public int ReleasedYear { get;   set;}
+        public DateTime CreatedDate { get;  set; }
 
-        public int TrackNumber { get; private set; }
+        public int TrackNumber { get; set; }
 
-        public TypeOfLanguages Language { get; private set; }
+        public TypeOfLanguages Language { get;  set; }
 
-        public double Rating { get;  private set; }
-        public string Availability { get;  private set; }
+        public double Rating { get;   set; }
+        public string Availability { get;   set; }
 
-        public  static int  lastTrackNumber = 0;
-
-        public static int Views { get; private set; }
+  
+        public int Views { get;  set; }
 
         #endregion
 
@@ -43,7 +42,7 @@ namespace MovieLibrary
 
         public MovieDetails()
         {
-            TrackNumber = ++lastTrackNumber;
+ 
             CreatedDate = DateTime.Now;
             Views = 0;
            
@@ -65,8 +64,11 @@ namespace MovieLibrary
       
         public void ChangeViewsNumbers(int views)
         {
+           
             Views = views;
         }
+
+     
 
 
         #endregion

@@ -10,27 +10,54 @@ namespace MovieLibrary
     static class Movielibrarian
 
     {
-        private static List<MovieDetails> movies = new List<MovieDetails>();
+        private static MovieContext db = new MovieContext();
         public static MovieDetails CreateMovieDetails(string name, TypeOfLanguages language, double rating, int releasedYear, string availability)
         {
             var movieDetail = new MovieDetails();
             movieDetail.AddMovieDetails(name, language, rating, releasedYear, availability);
-            movies.Add(movieDetail);
+            db.MoviesDetails.Add(movieDetail);
+            db.SaveChanges();
             return movieDetail;
             
         }
 
-        public static void ChangeMovieDetails(string name, int views)
+        public static void ChangeMovieDetails(int tracknumber, int views)
         {
-            var movieDetails = movies.SingleOrDefault(m => m.MovieName == name);
+            var movieDetails = db.MoviesDetails.SingleOrDefault(m => m.TrackNumber == tracknumber);
                 if (movieDetails == null)
             {
                 return;
 
             }
-            var movie = new MovieDetails();
-            movie.ChangeViewsNumbers(views);
+            movieDetails.ChangeViewsNumbers(views);
 
+        }
+
+        public static void RentMovie(string moviename,TypeOfLanguages language, int releaseyear )
+
+        {
+            var movieRental = new MovieRental
+            {
+                MovieName = moviename,
+                Language = language,
+                ReleasedYear = releaseyear,
+                RentalType = TypesOfRental.Rent
+
+            };
+
+        }
+
+        public static void BuyMovie(string moviename, string language, int releaseyear)
+
+        {
+            var movieRental = new MovieRental
+            {
+                MovieName = moviename,
+                Language = Enum.Parse<TypeOfLanguages>(language),
+                ReleasedYear = releaseyear,
+                RentalType = TypesOfRental.Buy
+
+            };
 
         }
 
