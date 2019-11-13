@@ -7,11 +7,11 @@ namespace MovieLibrary
 {
     
 
-    static class Movielibrarian
+    public static class Movielibrarian
 
     {
         private static MovieContext db = new MovieContext();
-        public static MovieDetails CreateMovieDetails(string name, TypeOfLanguages language, double rating, int releasedYear, string availability)
+        public static MovieDetails CreateMovieDetails(string name, TypeOfLanguages language, int releasedYear,string availability, double rating)
         {
             var movieDetail = new MovieDetails();
             movieDetail.AddMovieDetails(name, language, rating, releasedYear, availability);
@@ -19,6 +19,18 @@ namespace MovieLibrary
             db.SaveChanges();
             return movieDetail;
             
+        }
+
+        public static IEnumerable<MovieDetails> GetAllMoviesByLanguage(TypeOfLanguages language)
+        {
+            return db.MoviesDetails.Where(m => m.Language == language)
+                .OrderBy(m => m.ReleasedYear);
+        }
+
+        public static IEnumerable<MovieRental> GetAllMoviesByRentalType(TypesOfRental rentalType)
+        {
+            return db.MoviesRental.Where(r => r.RentalType == rentalType);
+
         }
 
         public static void ChangeMovieDetails(int tracknumber, int views)
@@ -44,7 +56,8 @@ namespace MovieLibrary
                 RentalType = TypesOfRental.Rent
 
             };
-
+            db.MoviesRental.Add(movieRental);
+            db.SaveChanges();
         }
 
         public static void BuyMovie(string moviename, string language, int releaseyear)
@@ -59,6 +72,8 @@ namespace MovieLibrary
 
             };
 
+            db.MoviesRental.Add(movieRental);
+            db.SaveChanges();
         }
 
     }

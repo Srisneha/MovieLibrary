@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MovieLibrary
 {
-    class MovieContext : DbContext
+    public class MovieContext : DbContext
 
     {
 

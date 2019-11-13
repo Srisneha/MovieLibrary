@@ -10,7 +10,7 @@ namespace MovieLibrary
     /// And user can only have view access to view the details
     /// </summary>
     /// 
-    enum TypeOfLanguages
+    public enum TypeOfLanguages
     {
         English,
         Tamil,
@@ -19,7 +19,7 @@ namespace MovieLibrary
         Malayalam,
         Hindi
     }
-    class MovieDetails
+    public class MovieDetails
     {
         #region Properties
         public string MovieName { get;   set; }

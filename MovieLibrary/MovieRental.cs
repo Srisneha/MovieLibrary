@@ -4,13 +4,13 @@ using System.Text;
 
 namespace MovieLibrary
 {
-    enum TypesOfRental
+   public enum TypesOfRental
     {
        Rent,
        Buy
     }
     
-    class MovieRental
+  public  class MovieRental
     {
         public int RentalID { get; set; }
         public string MovieName { get; set; }
