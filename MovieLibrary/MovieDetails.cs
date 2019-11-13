@@ -12,10 +12,9 @@ namespace MovieLibrary
     /// 
     public enum TypeOfLanguages
     {
-        English,
+       
         Tamil,
         Telegu,
-        Kanada,
         Malayalam,
         Hindi
     }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,20 +9,18 @@ using MovieLibrary;
 
 namespace MovieUI.Controllers
 {
-   
-    public class TamilController : Controller
+    public class MalayalamController : Controller
     {
         private readonly MovieContext _context = new MovieContext();
 
-      
-
-        // GET: Tamil
+        
+        // GET: Malayalam
         public async Task<IActionResult> Index()
         {
-            return View(Movielibrarian.GetAllMoviesByLanguage(TypeOfLanguages.Tamil));
+            return View(Movielibrarian.GetAllMoviesByLanguage(TypeOfLanguages.Malayalam));
         }
 
-        // GET: Tamil/Details/5
+        // GET: Malayalam/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,28 +38,28 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
-        // GET: Tamil/Create
+        // GET: Malayalam/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Tamil/Create
+        // POST: Malayalam/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieName,ReleasedYear,Language,Availability,Rating")] MovieDetails movieDetails)
+        public async Task<IActionResult> Create([Bind("MovieName,ReleasedYear,Language,Rating,Availability")] MovieDetails movieDetails)
         {
             if (ModelState.IsValid)
             {
-                Movielibrarian.CreateMovieDetails(movieDetails.MovieName, movieDetails.Language, movieDetails.ReleasedYear, movieDetails.Availability,movieDetails.Rating);
+                Movielibrarian.CreateMovieDetails(movieDetails.MovieName, movieDetails.Language, movieDetails.ReleasedYear, movieDetails.Availability, movieDetails.Rating);
                 return RedirectToAction(nameof(Index));
             }
             return View(movieDetails);
         }
 
-        // GET: Tamil/Edit/5
+        // GET: Malayalam/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,7 +75,7 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
-        // POST: Tamil/Edit/5
+        // POST: Malayalam/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -113,7 +110,7 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
-        // GET: Tamil/Delete/5
+        // GET: Malayalam/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,7 +128,7 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
-        // POST: Tamil/Delete/5
+        // POST: Malayalam/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
