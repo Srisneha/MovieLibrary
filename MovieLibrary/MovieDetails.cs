@@ -12,10 +12,10 @@ namespace MovieLibrary
     /// 
     public enum TypeOfLanguages
     {
-       
-        Tamil,
+        
+        Tamil =1,
         Telegu,
-        Malayalam,
+        Malayalam = 4,
         Hindi
     }
     public class MovieDetails
