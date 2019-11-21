@@ -33,18 +33,20 @@ namespace MovieLibrary
 
         }
 
-        public static void ChangeMovieDetails(int tracknumber, int views)
+        public static MovieDetails GetMovieDetailsByTrackNumber(int trackNumber)
         {
-            var movieDetails = db.MoviesDetails.SingleOrDefault(m => m.TrackNumber == tracknumber);
-                if (movieDetails == null)
-            {
-                return;
-
-            }
-            movieDetails.ChangeViewsNumbers(views);
+           return db.MoviesDetails.Find(trackNumber);
+        }
+       
+        public static void UpdateMovieDetails(MovieDetails updatedmovieDetails)
+        {
+            var oldMovie  = GetMovieDetailsByTrackNumber(updatedmovieDetails.TrackNumber);
+            oldMovie.Rating = updatedmovieDetails.Rating;
+            oldMovie.Views = updatedmovieDetails.Views;
+            oldMovie.Availability = updatedmovieDetails.Availability;
+            db.SaveChanges();
 
         }
-
         public static void RentMovie(string moviename,TypeOfLanguages language, int releaseyear )
 
         {
