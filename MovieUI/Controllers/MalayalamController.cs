@@ -61,6 +61,7 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: Malayalam/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

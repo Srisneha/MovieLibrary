@@ -62,6 +62,8 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
+        [Authorize(Roles = "Administrator")]
+
         // GET: Telegu/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

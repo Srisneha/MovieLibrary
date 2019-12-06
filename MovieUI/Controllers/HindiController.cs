@@ -11,6 +11,7 @@ using MovieLibrary;
 namespace MovieUI.Controllers
 {
     [Authorize]
+    
     public class HindiController : Controller
     {
         private readonly MovieContext _context = new MovieContext();
@@ -62,7 +63,9 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
+
         // GET: Hindi/Edit/5
+        [Authorize(Roles ="Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
