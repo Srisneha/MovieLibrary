@@ -30,7 +30,12 @@ namespace MovieLibrary
         public TypeOfLanguages Language { get;  set; }
 
         public double Rating { get;   set; }
+
+        public double RentAmount { get; set; }
+
+        public double BuyAmount { get; set; }
         public string Availability { get;   set; }
+
 
   
         public int Views { get;  set; }
@@ -50,13 +55,15 @@ namespace MovieLibrary
 
         #region Methods
 
-        public void AddMovieDetails(string name,TypeOfLanguages language, double rating,int releasedYear, string availability)
+        public void AddMovieDetails(string name,TypeOfLanguages language, double rating,int releasedYear, string availability, double buyamount,double rentamount)
         {
             MovieName = name;
             Language = language;
             Rating = rating;
             ReleasedYear = releasedYear;
             Availability = availability;
+            BuyAmount = buyamount;
+            RentAmount = rentamount;
             
         }
 

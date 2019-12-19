@@ -18,7 +18,10 @@ namespace MovieLibrary
 
         public int ReleasedYear { get; set; }
         public TypesOfRental RentalType { get; set; }
+
+        public double Amount { get; set; }
         public int TrackNumber { get; set; }
+       
         public virtual MovieDetails MovieDetails { get; set; }
     }
 }

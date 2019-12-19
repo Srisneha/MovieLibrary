@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieLibrary;
 
 namespace MovieLibrary.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20191216194045_NextStep")]
+    partial class NextStep
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +29,7 @@ namespace MovieLibrary.Migrations
 
                     b.Property<string>("Availability");
 
-                    b.Property<double>("BuyAmount")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(null);
+                    b.Property<double>("BuyAmount");
 
                     b.Property<DateTime>("CreatedDate");
 
@@ -44,9 +44,7 @@ namespace MovieLibrary.Migrations
 
                     b.Property<int>("ReleasedYear");
 
-                    b.Property<double>("RentAmount")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(null);
+                    b.Property<double>("RentAmount");
 
                     b.Property<int>("Views");
 

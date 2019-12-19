@@ -11,10 +11,10 @@ namespace MovieLibrary
 
     {
         private static MovieContext db = new MovieContext();
-        public static MovieDetails CreateMovieDetails(string name, TypeOfLanguages language, int releasedYear,string availability, double rating)
+        public static MovieDetails CreateMovieDetails(string name, TypeOfLanguages language, int releasedYear,string availability, double rating,double buyamount, double rentamount)
         {
             var movieDetail = new MovieDetails();
-            movieDetail.AddMovieDetails(name, language, rating, releasedYear, availability);
+            movieDetail.AddMovieDetails(name, language, rating, releasedYear, availability,buyamount,rentamount);
             db.MoviesDetails.Add(movieDetail);
             db.SaveChanges();
             return movieDetail;
@@ -27,9 +27,9 @@ namespace MovieLibrary
                 .OrderBy(m => m.ReleasedYear);
         }
 
-        public static IEnumerable<MovieRental> GetAllMoviesByRentalType(TypesOfRental rentalType)
+        public static IEnumerable<MovieRental> GetAllMoviesByRentalType(TypesOfRental rentalType, TypeOfLanguages languages)
         {
-            return db.MoviesRental.Where(r => r.RentalType == rentalType);
+            return db.MoviesRental.Where(r => r.RentalType == rentalType && r.Language == languages);
 
         }
 
@@ -47,33 +47,52 @@ namespace MovieLibrary
             db.SaveChanges();
 
         }
-        public static void RentMovie(string moviename,TypeOfLanguages language, int releaseyear )
+        public static void RentMovie(int trackNumber)
 
         {
+            var movie = db.MoviesDetails.SingleOrDefault(m => m.TrackNumber == trackNumber);
+            if(movie == null)
+            {
+                //throw exception
+                return;
+            }
+
+  
+
             var movieRental = new MovieRental
             {
-                MovieName = moviename,
-                Language = language,
-                ReleasedYear = releaseyear,
-                RentalType = TypesOfRental.Rent
-
+                MovieName = movie.MovieName,
+                Language = movie.Language,
+                ReleasedYear = movie.ReleasedYear,
+                RentalType = TypesOfRental.Rent,
+                Amount = movie.RentAmount,
+                TrackNumber = trackNumber
             };
             db.MoviesRental.Add(movieRental);
             db.SaveChanges();
         }
 
-        public static void BuyMovie(string moviename, string language, int releaseyear)
+        public static void BuyMovie(int trackNumber)
 
         {
+            var movie = db.MoviesDetails.SingleOrDefault(m => m.TrackNumber == trackNumber);
+            if (movie == null)
+            {
+                throw new ArgumentNullException();
+                
+            }
+
+
             var movieRental = new MovieRental
             {
-                MovieName = moviename,
-                Language = Enum.Parse<TypeOfLanguages>(language),
-                ReleasedYear = releaseyear,
-                RentalType = TypesOfRental.Buy
+                MovieName = movie.MovieName,
+                Language = movie.Language,
+                ReleasedYear = movie.ReleasedYear,
+                RentalType = TypesOfRental.Buy,
+                Amount = movie.BuyAmount,
+                TrackNumber = trackNumber
 
             };
-
             db.MoviesRental.Add(movieRental);
             db.SaveChanges();
         }

@@ -39,6 +39,18 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="BuyAmount" class="control-label"></label>
+                <input asp-for="BuyAmount" class="form-control" />
+                <span asp-validation-for="BuyAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RentAmount" class="control-label"></label>
+                <input asp-for="RentAmount" class="form-control" />
+                <span asp-validation-for="RentAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>

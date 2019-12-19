@@ -52,11 +52,11 @@ namespace MovieUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieName,ReleasedYear,Language,Availability,Rating")] MovieDetails movieDetails)
+        public async Task<IActionResult> Create([Bind("MovieName,ReleasedYear,Language,Availability,Rating,BuyAmount,RentAmount")] MovieDetails movieDetails)
         {
             if (ModelState.IsValid)
             {
-                Movielibrarian.CreateMovieDetails(movieDetails.MovieName, movieDetails.Language, movieDetails.ReleasedYear, movieDetails.Availability,movieDetails.Rating);
+                Movielibrarian.CreateMovieDetails(movieDetails.MovieName, movieDetails.Language, movieDetails.ReleasedYear, movieDetails.Availability,movieDetails.Rating,movieDetails.BuyAmount,movieDetails.RentAmount);
                 return RedirectToAction(nameof(Index));
             }
             return View(movieDetails);
@@ -114,38 +114,82 @@ namespace MovieUI.Controllers
             return View(movieDetails);
         }
 
-        // GET: Tamil/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        private bool MovieDetailsExists(int trackNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        //Get
+        public async Task<IActionResult> Rent(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var movieDetails = await _context.MoviesDetails
-                .FirstOrDefaultAsync(m => m.TrackNumber == id);
+            var movieDetails = Movielibrarian.GetMovieDetailsByTrackNumber(id.Value);
             if (movieDetails == null)
             {
                 return NotFound();
             }
-
             return View(movieDetails);
+
         }
 
-        // POST: Tamil/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<IActionResult> Rent(int id)
         {
-            var movieDetails = await _context.MoviesDetails.FindAsync(id);
-            _context.MoviesDetails.Remove(movieDetails);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            Movielibrarian.RentMovie(id);
+
+            return RedirectToAction(nameof(MovieRental));
+
         }
 
-        private bool MovieDetailsExists(int id)
+
+
+
+        //GET
+        public async Task<IActionResult> MovieRental()
         {
-            return _context.MoviesDetails.Any(e => e.TrackNumber == id);
+            return View(Movielibrarian.GetAllMoviesByRentalType(TypesOfRental.Rent,TypeOfLanguages.Tamil));
+        }
+
+
+        //Get
+        public async Task<IActionResult> Buy(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movieDetails = Movielibrarian.GetMovieDetailsByTrackNumber(id.Value);
+            if (movieDetails == null)
+            {
+                return NotFound();
+            }
+            return View(movieDetails);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Buy(int id)
+        {
+
+            Movielibrarian.BuyMovie(id);
+
+            return RedirectToAction(nameof(MovieRentalBuy));
+
+        }
+
+
+
+
+        //GET
+        public async Task<IActionResult> MovieRentalBuy()
+        {
+            return View(Movielibrarian.GetAllMoviesByRentalType(TypesOfRental.Buy, TypeOfLanguages.Tamil));
         }
     }
 }

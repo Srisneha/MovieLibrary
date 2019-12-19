@@ -39,6 +39,12 @@ namespace MovieLibrary
                     entity.Property(m => m.Rating)
                     .HasDefaultValue();
 
+                    entity.Property(m => m.BuyAmount)
+                    .IsRequired();
+
+                    entity.Property(m => m.RentAmount)
+                    .IsRequired();
+
                     entity.ToTable("MoviesDetails");
                 });
 
@@ -53,11 +59,13 @@ namespace MovieLibrary
                 entity.Property(r => r.Language).IsRequired();
                 entity.Property(r => r.RentalType).IsRequired();
                 entity.Property(r => r.ReleasedYear).IsRequired();
+                entity.Property(r => r.Amount).IsRequired();
 
                 entity.HasOne(r => r.MovieDetails)
                 .WithMany()
                 .HasForeignKey(r => r.TrackNumber);
 
+                entity.ToTable("MoviesRental");
             }
             );
 

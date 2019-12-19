@@ -35,42 +35,55 @@
             <th>
                 @Html.DisplayNameFor(model => model.Views)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentAmount)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MovieName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleasedYear)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Language)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Availability)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Views)
-                </td>
-                <td>
-                     @if ((await AuthorizationService.AuthorizeAsync(User, Model, "RequireAdministratorRole")).Succeeded)
-                     {
-                    <a asp-action="Edit" asp-route-id="@item.TrackNumber">Edit</a><span>|</span> }
-                    <a asp-action="Details" asp-route-id="@item.TrackNumber">Details</a><span>|</span> 
-                    <a asp-action="Delete" asp-route-id="@item.TrackNumber">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleasedYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Availability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Views)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuyAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentAmount)
+            </td>
+            <td>
+                @if ((await AuthorizationService.AuthorizeAsync(User, Model, "RequireAdministratorRole")).Succeeded)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.TrackNumber">Edit</a><span>|</span>}
+                <a asp-action="Details" asp-route-id="@item.TrackNumber">Details</a><span>|</span>
+                <a asp-action="Rent" asp-route-id="@item.TrackNumber">Rent</a><span>|</span>
+                <a asp-action="Buy" asp-route-id="@item.TrackNumber">Buy</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
